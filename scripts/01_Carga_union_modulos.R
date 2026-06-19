@@ -6,8 +6,9 @@
 #===============================================================================
 
 #1. Cargar librerías------------------------------------------------------------
-library(haven)
 library(dplyr)
+library(tidyverse)
+library(janitor)
 renv::snapshot()
 
 #2. Importar datos--------------------------------------------------------------
@@ -40,5 +41,7 @@ datos_final <- mod200_500 %>%
 
 #4. Exportar base de datos------------------------------------------------------
 library(arrow)
-renv::snapshot
+renv::snapshot()
 write_parquet(datos_final, "datos/procesados/datos_finales_180626")
+
+renv::snapshot()
