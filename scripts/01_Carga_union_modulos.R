@@ -27,3 +27,10 @@ keys_persona <- c(keys_hogar, "CODPERSO")
 #Paso 2: unir módulo 200 y 500 a nivel persona----------------------------------
 mod200_500 <- mod200 %>%
   inner_join(mod500, by = keys_persona)
+
+#Paso 3: crear variable dummy de acceso a Cuna Más (Cuidado Diurno) a nivel hogar ------------------------------------------
+cuna_mas <- mod700B %>%
+  mutate(acceso_cunamas = if_else(P712 == 1, 1, 0)) %>%
+  group_by(across(all_of(keys_hogar))) %>%
+  summarise(acceso_cunamas = max(acceso_cunamas, na.rm = TRUE), .groups = "drop")
+
