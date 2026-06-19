@@ -5,13 +5,25 @@
 #Fecha: 18/06/26
 #===============================================================================
 
-#Cargar librerías---------------------------------------------------------------
+#1. Cargar librerías------------------------------------------------------------
 library(haven)
 library(dplyr)
 renv::snapshot()
 
-#Importar datos-----------------------------------------------------------------
-mod700B <- read.csv("datos/crudos/ENAHO01-2025-700B.csv", fileEncoding = "Latin1") #Acceso a programas sociales
+#2. Importar datos--------------------------------------------------------------
+mod700B <- read.csv("datos/crudos/ENAHO01-2025-700B.csv", fileEncoding = "Latin1", sep = ";") #Acceso a programas sociales
 mod500  <- read.csv("datos/crudos/ENAHO01A-2025-500.csv", fileEncoding = "Latin1", sep = ";") #Empleo e Ingresos
-mod200  <- read.csv("datos/crudos/ENAHO01-2025-200.csv", fileEncoding = "Latin1") #Características de los miembros del hogar
+mod200  <- read.csv("datos/crudos/ENAHO01-2025-200.csv", fileEncoding = "Latin1", sep = ";") #Características de los miembros del hogar
+sumaria_8g <- read.csv("datos/crudos/Sumaria-2025.csv", fileEncoding = "Latin1", sep = ";")
 
+#3. Unión de bases de datos-----------------------------------------------------
+#Paso 1: Definir keys-----------------------------------------------------------
+keys_hogar <- c("AÑO", "MES", "CONGLOME", "VIVIENDA", "HOGAR", 
+                "UBIGEO", "DOMINIO", "ESTRATO", "NCONGLOME", "SUB_CONGLOME")
+
+keys_persona <- c(keys_hogar, "CODPERSO")
+
+
+#Paso 2: unir módulo 200 y 500 a nivel persona----------------------------------
+mod200_500 <- mod200 %>%
+  inner_join(mod500, by = keys_persona)
