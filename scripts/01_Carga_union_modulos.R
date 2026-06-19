@@ -34,3 +34,7 @@ cuna_mas <- mod700B %>%
   group_by(across(all_of(keys_hogar))) %>%
   summarise(acceso_cunamas = max(acceso_cunamas, na.rm = TRUE), .groups = "drop")
 
+#Paso 4: unir todo a nivel hogar------------------------------------------------
+datos_final <- mod200_500 %>%
+  left_join(cuna_mas, by = keys_hogar)
+
