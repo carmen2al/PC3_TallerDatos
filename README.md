@@ -23,6 +23,7 @@ La versión de todas las librerías se controla usando 'renv'
 
 ## Estructura de directorio
 El directorio se organiza a través de la siguiente estructura de carpetas:
+```text
 ├── CreacionCarpetas_180626.R          # Script principal: configuración del entorno y creación de carpetas
 ├── datos/
 │   ├── crudos/                        # Módulos originales de la ENAHO en formato .csv
@@ -36,3 +37,4 @@ El directorio se organiza a través de la siguiente estructura de carpetas:
 ├── PC3_TallerDatos.Rproj
 ├── README.md
 └── renv.lock                          # Registro exacto de las versiones de las librerías
+```
