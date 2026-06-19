@@ -38,3 +38,7 @@ cuna_mas <- mod700B %>%
 datos_final <- mod200_500 %>%
   left_join(cuna_mas, by = keys_hogar)
 
+#4. Exportar base de datos------------------------------------------------------
+library(arrow)
+renv::snapshot
+write_parquet(datos_final, "datos/procesados/datos_finales_180626")
