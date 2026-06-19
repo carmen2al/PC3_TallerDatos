@@ -8,4 +8,5 @@
 #Cargar librerías --------------------------------------------------------------
 library(haven)
 library(dplyr)
+renv::snapshot()
 
